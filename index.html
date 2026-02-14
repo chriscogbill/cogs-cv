@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chris Cogbill - CV</title>
+    <meta name="description" content="Chris Cogbill - Unit4-certified ERP Consultant & Solutions Architect, Full-stack Developer, Cambridge Physics Graduate">
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #1a1a1a;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Header ────────────────────────────────── */
+        .header {
+            background-color: #2d2d2d;
+            color: #f5f5f5;
+            padding: 2.5rem 2rem;
+        }
+
+        .header-inner {
+            max-width: 920px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .headshot {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255,255,255,0.2);
+            flex-shrink: 0;
+        }
+
+        .header-text h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .header-text .tagline {
+            font-size: 0.95rem;
+            color: #b0b0b0;
+            line-height: 1.5;
+        }
+
+        /* ── Main Container ────────────────────────── */
+        .container {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 2.5rem;
+        }
+
+        /* ── Section Titles ────────────────────────── */
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #369b5a;
+        }
+
+        /* ── Experience Timeline ───────────────────── */
+        .timeline {
+            position: relative;
+            padding-left: 1.75rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 8px;
+            bottom: 0;
+            width: 2px;
+            background-color: #d1d5db;
+        }
+
+        .company-block {
+            margin-bottom: 2rem;
+        }
+
+        .company-name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            margin-bottom: 0.25rem;
+        }
+
+        .company-name a {
+            color: #1a1a1a;
+            text-decoration: none;
+            border-bottom: 1px solid #369b5a;
+            transition: color 0.2s ease;
+        }
+
+        .company-name a:hover {
+            color: #369b5a;
+        }
+
+        .role {
+            position: relative;
+            margin-bottom: 1.25rem;
+        }
+
+        .role::before {
+            content: '';
+            position: absolute;
+            left: -1.75rem;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #369b5a;
+            border: 2px solid #fff;
+            z-index: 1;
+        }
+
+        .role-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .role-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .role-location {
+            font-size: 0.85rem;
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        .role-date {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #369b5a;
+            margin-bottom: 0.35rem;
+        }
+
+        .role-desc {
+            font-size: 0.875rem;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .role-desc strong {
+            font-weight: 600;
+        }
+
+        .key-projects {
+            font-size: 0.875rem;
+            color: #374151;
+        }
+
+        .key-projects ul {
+            padding-left: 1.25rem;
+            margin-top: 0.25rem;
+        }
+
+        .key-projects li {
+            margin-bottom: 0.35rem;
+            line-height: 1.5;
+        }
+
+        /* ── Education ─────────────────────────────── */
+        .education-block {
+            position: relative;
+            padding-left: 1.75rem;
+        }
+
+        .education-block::before {
+            content: '';
+            position: absolute;
+            left: -1px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #369b5a;
+            border: 2px solid #fff;
+        }
+
+        .education-name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+        }
+
+        .education-name a {
+            color: #1a1a1a;
+            text-decoration: none;
+            border-bottom: 1px solid #369b5a;
+            transition: color 0.2s ease;
+        }
+
+        .education-name a:hover {
+            color: #369b5a;
+        }
+
+        .education-detail {
+            font-size: 0.9rem;
+            color: #374151;
+        }
+
+        .education-grade {
+            font-size: 0.875rem;
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        /* ── Right Column ──────────────────────────── */
+        .sidebar-section {
+            margin-bottom: 1.75rem;
+        }
+
+        .sidebar-section .section-title {
+            font-size: 1.1rem;
+        }
+
+        /* Contact */
+        .contact-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .contact-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.9rem;
+        }
+
+        .contact-list .icon {
+            width: 32px;
+            height: 32px;
+            background-color: #2d2d2d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-list .icon svg {
+            width: 16px;
+            height: 16px;
+            fill: #f5f5f5;
+        }
+
+        .contact-list a {
+            color: #1a1a1a;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .contact-list a:hover {
+            color: #369b5a;
+            border-bottom-color: #369b5a;
+        }
+
+        /* Skills */
+        .skills-category {
+            margin-bottom: 1rem;
+        }
+
+        .skills-category-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.3rem;
+        }
+
+        .skills-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+        }
+
+        .skills-list li {
+            font-size: 0.8rem;
+            background-color: #e8e8e8;
+            color: #374151;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+        }
+
+        /* Professional Skills */
+        .prof-skill-group {
+            margin-bottom: 0.75rem;
+        }
+
+        .prof-skill-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.15rem;
+        }
+
+        .prof-skill-detail {
+            font-size: 0.8rem;
+            color: #6b7280;
+            padding-left: 0.75rem;
+        }
+
+        .prof-skill-detail ul {
+            list-style: disc;
+            padding-left: 1rem;
+        }
+
+        .prof-skill-detail li {
+            margin-bottom: 0.1rem;
+        }
+
+        /* Other Interests */
+        .interests-list {
+            list-style: disc;
+            padding-left: 1.25rem;
+            font-size: 0.875rem;
+            color: #374151;
+        }
+
+        .interests-list li {
+            margin-bottom: 0.35rem;
+        }
+
+        /* ── Footer ────────────────────────────────── */
+        .footer {
+            text-align: center;
+            padding: 1.5rem 2rem;
+            color: #9ca3af;
+            font-size: 0.75rem;
+        }
+
+        .footer a {
+            color: #9ca3af;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: #369b5a;
+        }
+
+        /* ── Print Styles ──────────────────────────── */
+        @media print {
+            body { background: #fff; }
+            .header { break-inside: avoid; }
+            .company-block { break-inside: avoid; }
+            .footer { display: none; }
+        }
+
+        /* ── Responsive ────────────────────────────── */
+        @media (max-width: 768px) {
+            .header-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header-text .tagline {
+                font-size: 0.875rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .container {
+                padding: 1.25rem;
+            }
+
+            .role-header {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-text h1 {
+                font-size: 1.5rem;
+            }
+
+            .headshot {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── Header ────────────────────────────────── -->
+    <header class="header">
+        <div class="header-inner">
+            <img src="assets/headshot.jpg" alt="Chris Cogbill" class="headshot">
+            <div class="header-text">
+                <h1>Chris Cogbill</h1>
+                <p class="tagline">Unit4-certified ERP Consultant &amp; Solutions Architect | 10+ years | Agile Project Manager | Full-stack Developer (SQL, JavaScript, Python) | Cambridge Physics Graduate | AI Enthusiast</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- ── Main Content ──────────────────────────── -->
+    <div class="container">
+        <div class="grid">
+
+            <!-- ── Left Column ───────────────────── -->
+            <main>
+                <!-- Experience -->
+                <section>
+                    <h2 class="section-title">Experience</h2>
+                    <div class="timeline">
+
+                        <!-- SystemsAccountants -->
+                        <div class="company-block">
+                            <div class="company-name"><a href="https://www.systemsaccountants.com" target="_blank" rel="noopener">SystemsAccountants</a></div>
+
+                            <div class="role">
+                                <div class="role-date">Jul 2025</div>
+                                <div class="role-header">
+                                    <span class="role-title">Principal Consultant - Unit4</span>
+                                    <span class="role-location">London</span>
+                                </div>
+                                <p class="role-desc">In my role as Principal Consultant I have continued to run successful ERP implementation projects for various customers and cloud migrations for customers in the UK and across North America, in addition to smaller reporting and system enhancement projects. I continue to support the more junior consultants in the team as well as managing contractors.</p>
+                                <p class="role-desc">Strong business development track record with 11 of 12 bids successful.</p>
+                                <div class="key-projects">
+                                    <strong>Key Projects:</strong>
+                                    <ul>
+                                        <li><strong>Care UK:</strong> Led 5 acquisition integration projects for care home providers acquired by Welltower, delivering all on time. Client returned after trying a cheaper partner for 4 further projects through June 2026.</li>
+                                        <li><strong>City of Medicine Hat:</strong> Ran an intensive health check and produced a report feeding into the system pipeline for future finance improvements.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="role">
+                                <div class="role-date">Dec 2022</div>
+                                <div class="role-header">
+                                    <span class="role-title">Senior Consultant - Unit4</span>
+                                    <span class="role-location">London</span>
+                                </div>
+                                <p class="role-desc">Moved back to London after 5 years in the US, continuing as a Unit4 specialist with a mix of US, Canadian and UK clients.</p>
+                                <div class="key-projects">
+                                    <strong>Key Projects:</strong>
+                                    <ul>
+                                        <li><strong>Havas UK:</strong> Implemented utilisation and client profitability reporting in Unit4, plus a REST API interface to PowerBI. Leveraged existing relationships from US-based Havas work.</li>
+                                        <li><strong>Medical Teams International:</strong> Took over and revived a failing P2P (purchasing) implementation, delivering workflow automation. Later contracted for financial reporting advice.</li>
+                                        <li><strong>Oanda:</strong> Full planner and commitment accounting implementation delivered from scoping to production in under a month.</li>
+                                        <li><strong>Triton:</strong> Delivered an interface project between the CRM system and Unit4.</li>
+                                        <li><strong>College of Medicine Hat:</strong> Delivered projects to implement the Unit4 modules for Fixed Assets and T4A (Canadian tax documents).</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="role">
+                                <div class="role-date">Mar 2017</div>
+                                <div class="role-header">
+                                    <span class="role-title">Senior Consultant - Unit4</span>
+                                    <span class="role-location">Chicago</span>
+                                </div>
+                                <p class="role-desc">I joined SystemsAccountants' US operation (then 6 employees) and helped grow it to 100+ staff across three offices. The work with Havas made them SA's biggest global client by total revenue.</p>
+                                <div class="key-projects">
+                                    <strong>Key Projects:</strong>
+                                    <ul>
+                                        <li><strong>Havas Worldwide:</strong> Helped migrate ~60 agencies onto Unit4 ERP over 5 years. Predominantly worked across the New York, Boston and Chicago offices. Led Planning, Budgeting and FP&amp;A reporting setup.</li>
+                                        <li><strong>Havas Media:</strong> Won and led SystemsAccountants' first large-scale implementation. Headed the consulting team across two phases including AP and Fixed Assets (live since April 2021).</li>
+                                        <li>Also delivered projects for the University of Toledo, The Reinvestment Fund and Hycite, and authored a successful Unit4 upgrade bid for Oanda.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cogs Technology Solutions -->
+                        <div class="company-block">
+                            <div class="company-name"><a href="https://cogs.tech" target="_blank" rel="noopener">Cogs Technology Solutions</a></div>
+
+                            <div class="role">
+                                <div class="role-date">Oct 2015</div>
+                                <div class="role-header">
+                                    <span class="role-title">Independent Consultant</span>
+                                    <span class="role-location">London</span>
+                                </div>
+                                <p class="role-desc">I setup my own business providing consulting services and contracted predominantly to the UK Atomic Energy Authority (UKAEA) as well as to Methods (my previous employer).</p>
+                                <div class="key-projects">
+                                    <strong>Key Projects:</strong>
+                                    <ul>
+                                        <li><strong>UKAEA:</strong> Full-cycle Unit4 ERP implementation (HR and finance). Progressed from lead financials consultant to solution architect, delivering on time. Set up and trained their support team before departing.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Methods Consulting -->
+                        <div class="company-block">
+                            <div class="company-name"><a href="https://www.methods.co.uk" target="_blank" rel="noopener">Methods Consulting</a></div>
+
+                            <div class="role">
+                                <div class="role-date">Dec 2014</div>
+                                <div class="role-header">
+                                    <span class="role-title">Senior Consultant</span>
+                                </div>
+                            </div>
+                            <div class="role">
+                                <div class="role-date">Apr 2014</div>
+                                <div class="role-header">
+                                    <span class="role-title">Consultant</span>
+                                </div>
+                            </div>
+                            <div class="role">
+                                <div class="role-date">Jun 2013</div>
+                                <div class="role-header">
+                                    <span class="role-title">Junior Consultant</span>
+                                </div>
+                                <p class="role-desc">I joined Methods as a graduate and was promoted twice in 18 months to become the youngest senior consultant across the group.</p>
+                                <p class="role-desc">I delivered Unit4 implementations and upgrades for clients including West Suffolk Shared Services, Middlesbrough Council, and Macmillan Cancer Support.</p>
+                                <p class="role-desc">Prior to focussing on ERP, I was part of the team that did the first SalesForce implementation into local government (London Borough of Hounslow).</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Education -->
+                <section style="margin-top: 2rem;">
+                    <h2 class="section-title">Education</h2>
+                    <div class="education-block">
+                        <div class="education-name"><a href="https://www.cam.ac.uk" target="_blank" rel="noopener">University of Cambridge</a></div>
+                        <div class="education-detail">Natural Sciences: Physical Natural Sciences</div>
+                        <div class="education-grade">Grade 2:1</div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- ── Right Column ──────────────────── -->
+            <aside>
+                <!-- Contact -->
+                <section class="sidebar-section">
+                    <h2 class="section-title">Contact</h2>
+                    <ul class="contact-list">
+                        <li>
+                            <span class="icon">
+                                <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z"/></svg>
+                            </span>
+                            <a href="tel:+447749775744">+44 (0)7749775744</a>
+                        </li>
+                        <li>
+                            <span class="icon">
+                                <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                            </span>
+                            <a href="mailto:chris@cogs.tech">chris@cogs.tech</a>
+                        </li>
+                        <li>
+                            <span class="icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1a2 2 0 002 2v1.93zm6.9-2.54A1.99 1.99 0 0016 16h-1v-3a1 1 0 00-1-1H8v-2h2a1 1 0 001-1V7h2a2 2 0 002-2v-.41A7.99 7.99 0 0120 12c0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                            </span>
+                            <a href="https://cogs.tech" target="_blank" rel="noopener">cogs.tech</a>
+                        </li>
+                        <li>
+                            <span class="icon">
+                                <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                            </span>
+                            <a href="https://www.linkedin.com/in/chriscogbill" target="_blank" rel="noopener">linkedin.com/in/chriscogbill</a>
+                        </li>
+                        <li>
+                            <span class="icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 002 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"/></svg>
+                            </span>
+                            <a href="https://github.com/chriscogbill" target="_blank" rel="noopener">github.com/chriscogbill</a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Technical Skills -->
+                <section class="sidebar-section">
+                    <h2 class="section-title">Technical Skills</h2>
+
+                    <div class="skills-category">
+                        <div class="skills-category-title">Unit4 ERP (including ERPx)</div>
+                        <ul class="skills-list">
+                            <li>Record-to-Report (GL)</li>
+                            <li>Purchase-to-Pay</li>
+                            <li>Sales-to-Cash</li>
+                            <li>Planner (Budgeting)</li>
+                            <li>Fixed Assets</li>
+                            <li>Report Engine</li>
+                            <li>REST APIs</li>
+                            <li>Extension Kit</li>
+                            <li>SOAP Web Services</li>
+                        </ul>
+                    </div>
+
+                    <div class="skills-category">
+                        <div class="skills-category-title">Back-end Development</div>
+                        <ul class="skills-list">
+                            <li>SQL (MS SQL, PostgreSQL)</li>
+                            <li>Node.js + Express</li>
+                            <li>REST APIs</li>
+                            <li>Python</li>
+                            <li>Claude Code and Skills</li>
+                        </ul>
+                    </div>
+
+                    <div class="skills-category">
+                        <div class="skills-category-title">Front-end Development</div>
+                        <ul class="skills-list">
+                            <li>HTML, CSS, JavaScript</li>
+                            <li>React.js</li>
+                            <li>Git / Version Control</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Professional Skills -->
+                <section class="sidebar-section">
+                    <h2 class="section-title">Professional Skills</h2>
+
+                    <div class="prof-skill-group">
+                        <div class="prof-skill-title">Sales</div>
+                        <div class="prof-skill-detail">
+                            <ul>
+                                <li>Bid writing (win rate &gt;90%)</li>
+                                <li>Presentations / Demonstrations</li>
+                                <li>Unit4 report engine demo on Youtube with &gt;10k views</li>
+                                <li>Upselling &mdash; 6 clients who started with minor projects and later engaged us for upgrades / cloud migrations / reimplementations</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="prof-skill-group">
+                        <div class="prof-skill-title">Project Management</div>
+                        <div class="prof-skill-detail">
+                            <ul>
+                                <li>Agile</li>
+                                <li>Waterfall</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="prof-skill-group">
+                        <div class="prof-skill-title">System Design</div>
+                        <div class="prof-skill-detail">
+                            <ul>
+                                <li>Understanding complex requirements</li>
+                                <li>Implementing within system limitations</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="prof-skill-group">
+                        <div class="prof-skill-title">Training &amp; Mentoring</div>
+                        <div class="prof-skill-detail">
+                            <ul>
+                                <li>Provide support for consultancy team</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="prof-skill-group">
+                        <div class="prof-skill-title">Finance &amp; Accounting</div>
+                        <div class="prof-skill-detail">
+                            <ul>
+                                <li>Financial Reporting</li>
+                                <li>Budgeting Best Practices</li>
+                                <li>Month and Year End Processes</li>
+                                <li>US / Canada / UK tax</li>
+                                <li>Fixed Asset Treatments</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Other Interests -->
+                <section class="sidebar-section">
+                    <h2 class="section-title">Other Interests</h2>
+                    <ul class="interests-list">
+                        <li>Clubhouse Mobile Mini Golf (Founding Investor)</li>
+                        <li>Voluntary Tutoring (The Access Project and Oxbridge Interviews) and Reading Help (Coram Beanstalk)</li>
+                        <li>Fostering and Adoption</li>
+                        <li>Rental Property Management</li>
+                        <li>Sport (Crystal Palace fan)</li>
+                    </ul>
+                </section>
+            </aside>
+
+        </div>
+    </div>
+
+    <!-- ── Footer ────────────────────────────────── -->
+    <footer class="footer">
+        <a href="https://cogs.tech">&copy; 2026 cogs.tech</a>
+    </footer>
+
+</body>
+</html>
