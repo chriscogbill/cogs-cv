@@ -207,52 +207,6 @@
             line-height: 1.5;
         }
 
-        /* ── Education ─────────────────────────────── */
-        .education-block {
-            position: relative;
-            padding-left: 1.75rem;
-        }
-
-        .education-block::before {
-            content: '';
-            position: absolute;
-            left: -1px;
-            top: 6px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: #369b5a;
-            border: 2px solid #fff;
-        }
-
-        .education-name {
-            font-size: 1.05rem;
-            font-weight: 700;
-            letter-spacing: 0.03em;
-        }
-
-        .education-name a {
-            color: #1a1a1a;
-            text-decoration: none;
-            border-bottom: 1px solid #369b5a;
-            transition: color 0.2s ease;
-        }
-
-        .education-name a:hover {
-            color: #369b5a;
-        }
-
-        .education-detail {
-            font-size: 0.9rem;
-            color: #374151;
-        }
-
-        .education-grade {
-            font-size: 0.875rem;
-            color: #6b7280;
-            font-style: italic;
-        }
-
         /* ── Right Column ──────────────────────────── */
         .sidebar-section {
             margin-bottom: 1.75rem;
@@ -503,7 +457,7 @@
             <img src="assets/headshot.png" alt="Chris Cogbill" class="headshot">
             <div class="header-text">
                 <h1>Chris Cogbill</h1>
-                <p class="tagline">Unit4-certified ERP Consultant &amp; Solutions Architect | 10+ years | Agile Project Manager | Full-stack Developer (SQL, JavaScript, Python) | Cambridge Physics Graduate | AI Enthusiast</p>
+                <p class="tagline">Unit4-certified ERP Consultant &amp; Solutions Architect | 10+ years | Agile Project Manager | Full-stack Developer (SQL, JavaScript, Python) | Cambridge Physics Graduate</p>
             </div>
         </div>
     </header>
@@ -630,10 +584,21 @@
                 <!-- Education -->
                 <section style="margin-top: 2rem;">
                     <h2 class="section-title">Education</h2>
-                    <div class="education-block">
-                        <div class="education-name"><a href="https://www.cam.ac.uk" target="_blank" rel="noopener">University of Cambridge</a></div>
-                        <div class="education-detail">Natural Sciences: Physical Natural Sciences</div>
-                        <div class="education-grade">Grade 2:1</div>
+                    <div class="timeline">
+
+                        <!-- University of Cambridge -->
+                        <div class="company-block">
+                            <div class="company-name"><a href="https://www.cam.ac.uk" target="_blank" rel="noopener">University of Cambridge</a></div>
+
+                            <div class="role">
+                                <div class="role-date">2010<span class="date-end">– 2013</span></div>
+                                <div class="role-header">
+                                    <span class="role-title">BA (Hons) Natural Sciences</span>
+                                </div>
+                                <p class="role-desc">Physical Natural Sciences — Grade 2:1</p>
+                            </div>
+                        </div>
+
                     </div>
                 </section>
             </main>
