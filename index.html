@@ -127,7 +127,7 @@
         .role::before {
             content: '';
             position: absolute;
-            left: calc(-1.25rem - 5px);
+            left: calc(-1.25rem + 1px);
             top: 6px;
             width: 12px;
             height: 12px;
@@ -135,6 +135,7 @@
             background-color: #369b5a;
             border: 2px solid #fff;
             z-index: 1;
+            transform: translateX(-50%);
         }
 
         .role-header {
