@@ -190,11 +190,13 @@
             display: none;
         }
 
-        .role-date:hover .date-end {
-            display: block;
-            font-size: 0.6rem;
-            line-height: 1.4;
-            white-space: nowrap;
+        @media (min-width: 769px) {
+            .role-date:hover .date-end {
+                display: block;
+                font-size: 0.6rem;
+                line-height: 1.4;
+                white-space: nowrap;
+            }
         }
 
         .role-desc {
