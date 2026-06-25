@@ -567,6 +567,8 @@
                 font-weight: 700; text-align: right;
             }
             .role::before { background-color: #1a1a1a; top: 4px; }
+            /* Education entry shows its full date range; work entries show start only */
+            section[style] .role-date .date-end { display: inline; }
 
             /* Generic briefcase / graduation-cap timeline icons (white on black) */
             .company-logo { content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='12' fill='%231a1a1a'/%3E%3Cpath fill='%23ffffff' transform='translate(5,5) scale(0.58)' d='M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z'/%3E%3C/svg%3E"); padding: 0; background: transparent; width: 22px; height: 22px; }
@@ -875,7 +877,7 @@
                             <div class="company-name"><img src="assets/cambridge-logo.svg" alt="" class="company-logo edu"><a href="https://www.cam.ac.uk" target="_blank" rel="noopener">University of Cambridge</a></div>
 
                             <div class="role">
-                                <div class="role-date">2010<span class="date-end">– 2013</span></div>
+                                <div class="role-date">2009<span class="date-end">–2012</span></div>
                                 <div class="role-header">
                                     <span class="role-title">BA (Hons) Natural Sciences</span>
                                 </div>
