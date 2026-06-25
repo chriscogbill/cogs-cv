@@ -534,14 +534,14 @@
                 align-self: start;
                 -webkit-box-decoration-break: clone;
                 box-decoration-break: clone;
-                padding: 12mm 0 2mm;
+                padding: 12mm 0 9mm;
             }
             main::before {
                 content: '';
                 position: absolute;
                 left: 2.25rem;
                 top: calc(12mm + 2.75rem);
-                bottom: 0.4rem;
+                bottom: calc(9mm + 0.4rem);
                 width: 2px;
                 background: #1a1a1a;
             }
@@ -575,9 +575,10 @@
             .company-logo.edu { content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='12' fill='%231a1a1a'/%3E%3Cpath fill='%23ffffff' transform='translate(4.5,5.5) scale(0.62)' d='M12 3 1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z'/%3E%3C/svg%3E"); }
             .company-name { font-size: 0.98rem; }
             .role-desc, .key-projects, .key-projects li { font-size: 0.76rem; }
-            .role { margin-bottom: 0.42rem; }
+            .role { margin-bottom: 0.7rem; }
             .role-header { break-inside: avoid; break-after: avoid; }
-            .company-block { margin-bottom: 0.6rem; }
+            .key-projects { break-inside: avoid; }
+            .company-block { margin-bottom: 0.9rem; }
             .company-name { margin-bottom: 0.12rem; break-after: avoid; }
             .role-desc { margin-bottom: 0.26rem; }
             .key-projects ul { margin-top: 0.18rem; }
