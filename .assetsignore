@@ -5,6 +5,7 @@ node_modules/
 .DS_Store
 *.log
 worker.js
+make-pdf.sh
 wrangler.jsonc
 .assetsignore
 .dev.vars
