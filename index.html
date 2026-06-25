@@ -1,11 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="cv-unit4">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chris Cogbill - CV</title>
-    <meta name="description" content="Chris Cogbill - Unit4-certified ERP Consultant & Solutions Architect, Full-stack Developer, Cambridge Physics Graduate">
+    <meta name="description" content="Chris Cogbill - Solutions Architect & Principal Unit4 ERP Consultant, Full-stack Developer, Cambridge Physics Graduate">
     <link rel="icon" href="assets/cog-icon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+      // The live version is injected onto <html> by the Worker (read from KV),
+      // so every visitor sees the same one. ?cv= is a local preview override only.
+      (function () {
+        try {
+          var forced = new URLSearchParams(location.search).get('cv');
+          if (forced === 'ai' || forced === 'unit4') {
+            var r = document.documentElement;
+            r.classList.remove('cv-unit4', 'cv-ai');
+            r.classList.add('cv-' + forced);
+          }
+        } catch (e) {}
+      })();
+    </script>
     <style>
         *, *::before, *::after {
             margin: 0;
@@ -261,7 +278,7 @@
         .contact-list .icon {
             width: 32px;
             height: 32px;
-            background-color: #2d2d2d;
+            background-color: #1a1a1a;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -270,9 +287,38 @@
         }
 
         .contact-list .icon svg {
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 18px;
             fill: #f5f5f5;
+        }
+
+        /* LinkedIn: black square logo with the "in" knocked out (transparent) */
+        .contact-list .icon-li {
+            background-color: transparent;
+            border-radius: 0;
+        }
+        .contact-list .icon-li svg {
+            width: 35px;
+            height: 35px;
+            fill: #1a1a1a;
+        }
+
+        /* Web globe + GitHub: plain black logos, no badge, same size as the circles */
+        .contact-list .icon-web,
+        .contact-list .icon-gh {
+            background-color: transparent;
+        }
+        .contact-list .icon-web svg {
+            width: 30px;
+            height: 30px;
+            fill: none;
+            stroke: #1a1a1a;
+            stroke-width: 1.6;
+        }
+        .contact-list .icon-gh svg {
+            width: 32px;
+            height: 32px;
+            fill: #1a1a1a;
         }
 
         .contact-list a {
@@ -370,16 +416,222 @@
             color: #369b5a;
         }
 
-        /* ── Print Styles ──────────────────────────── */
+        /* ── CV Version Variants ───────────────────── */
+        .only-ai, .only-unit4 { display: none; }
+        html.cv-ai .only-ai { display: revert; }
+        html.cv-unit4 .only-unit4 { display: revert; }
+
+        /* ── Settings gear + version toggle (admin) ── */
+        .cv-admin {
+            position: fixed;
+            bottom: 1.25rem;
+            right: 1.25rem;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .cv-gear {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 0;
+            background: #2d2d2d;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.55;
+            transition: opacity 0.2s ease;
+        }
+        .cv-gear:hover { opacity: 1; }
+        .cv-gear svg { width: 19px; height: 19px; fill: #f5f5f5; }
+        .cv-toggle {
+            display: none;
+            background: #2d2d2d;
+            border-radius: 999px;
+            padding: 0.25rem;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+            gap: 0.15rem;
+        }
+        .cv-login {
+            display: none;
+            border: 0;
+            background: #2d2d2d;
+            color: #f5f5f5;
+            font: inherit;
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+            white-space: nowrap;
+        }
+        .cv-login:hover { background: #369b5a; }
+        html.admin .cv-admin.cv-open .cv-toggle { display: inline-flex; }
+        html:not(.admin) .cv-admin.cv-open .cv-login { display: inline-flex; }
+        .cv-toggle button {
+            border: 0;
+            background: transparent;
+            color: #b0b0b0;
+            font: inherit;
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 0.4rem 0.85rem;
+            border-radius: 999px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+        .cv-toggle button:hover { color: #f5f5f5; }
+        html.cv-unit4 .cv-toggle button[data-v="unit4"],
+        html.cv-ai .cv-toggle button[data-v="ai"] {
+            background: #369b5a;
+            color: #fff;
+        }
+
+        /* ── Print / PDF Styles (A4, Canva-style document) ── */
         @media print {
-            body { background: #fff; }
-            .header { break-inside: avoid; }
-            .company-block { break-inside: avoid; }
-            .footer { display: none; }
+            /* Zero page margin: the grey column + timeline bleed to the page
+               edges and continue across pages; per-page insets come from
+               box-decoration-break: clone on the columns below. */
+            @page { size: A4; margin: 0; }
+            html, body {
+                background: #fff;
+                font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+                line-height: 1.3;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            /* Canva-style arrow header band (page 1): white above and to the right,
+               bleeds off the left edge. */
+            .header {
+                margin: 8mm 14mm 0 0;
+                padding: 1rem 4rem 1rem 12mm;
+                background: linear-gradient(90deg, #0d0d0d 0%, #3d3d3d 100%);
+                -webkit-clip-path: polygon(0 0, 92% 0, 100% 50%, 92% 100%, 0 100%);
+                clip-path: polygon(0 0, 92% 0, 100% 50%, 92% 100%, 0 100%);
+                break-inside: avoid;
+            }
+            .header-inner { max-width: none; gap: 0; justify-content: flex-start; align-items: center; }
+            .headshot { display: none; }
+            .header-text { text-align: left; }
+            .header-text h1 { font-size: 1.6rem; font-weight: 800; margin-bottom: 0.3rem; letter-spacing: 0; }
+            .header-text .tagline { font-size: 0.8rem; color: #dcdcdc; line-height: 1.45; }
+
+            .container { max-width: none; padding: 0 12mm; }
+            .grid { grid-template-columns: 1fr 240px; gap: 1.3rem; align-items: stretch; }
+
+            /* Left column: clone keeps the experience text inset on every page;
+               the top padding sets the gap between the banner and 'Experience'.
+               The timeline line is tied to this column so it starts at the first
+               briefcase and stops at the last entry (Education). */
+            main {
+                position: relative;
+                align-self: start;
+                -webkit-box-decoration-break: clone;
+                box-decoration-break: clone;
+                padding: 12mm 0 2mm;
+            }
+            main::before {
+                content: '';
+                position: absolute;
+                left: 2.25rem;
+                top: calc(12mm + 2.75rem);
+                bottom: 0.4rem;
+                width: 2px;
+                background: #1a1a1a;
+            }
+            .timeline { padding-left: 3.5rem; }
+            .timeline::before { display: none; }
+
+            /* Section titles: bold, no green underline, all the same size
+               (the .sidebar-section rule would otherwise make Contact larger). */
+            .section-title,
+            .sidebar-section .section-title {
+                font-size: 1.1rem; font-weight: 800;
+                border-bottom: 0; padding-bottom: 0; margin-bottom: 0.7rem;
+                break-after: avoid;
+            }
+            /* Indent left-column headings to align with roles, keeping the timeline gutter continuous */
+            main .section-title { padding-left: 3.5rem; }
+
+            /* Dates: small, stacked over two lines, right-aligned by the line */
+            .role-date {
+                color: #1a1a1a; top: 1px;
+                left: -3.5rem; width: 1.6rem;
+                font-size: 0.58rem; line-height: 1.2;
+                font-weight: 700; text-align: right;
+            }
+            .role::before { background-color: #1a1a1a; top: 4px; }
+
+            /* Generic briefcase / graduation-cap timeline icons (white on black) */
+            .company-logo { content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='12' fill='%231a1a1a'/%3E%3Cpath fill='%23ffffff' transform='translate(5,5) scale(0.58)' d='M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z'/%3E%3C/svg%3E"); padding: 0; background: transparent; width: 22px; height: 22px; }
+            .company-logo.edu { content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='12' fill='%231a1a1a'/%3E%3Cpath fill='%23ffffff' transform='translate(4.5,5.5) scale(0.62)' d='M12 3 1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z'/%3E%3C/svg%3E"); }
+            .company-name { font-size: 0.98rem; }
+            .role-desc, .key-projects, .key-projects li { font-size: 0.76rem; }
+            .role { margin-bottom: 0.42rem; }
+            .role-header { break-inside: avoid; break-after: avoid; }
+            .company-block { margin-bottom: 0.6rem; }
+            .company-name { margin-bottom: 0.12rem; break-after: avoid; }
+            .role-desc { margin-bottom: 0.26rem; }
+            .key-projects ul { margin-top: 0.18rem; }
+            .key-projects li { margin-bottom: 0.16rem; }
+            section[style] { margin-top: 0.8rem !important; } /* Education */
+
+            /* Right column: grey panel that bleeds to the page edges and continues
+               across the break (sliced), with rounded corners only at the true top
+               (p1) and bottom (p2). Section padding keeps text inset on every page. */
+            aside {
+                background: #e7e7e7;
+                border-radius: 16px;
+                margin-top: 14mm;
+                padding: 0 1.2rem 1.4rem;
+            }
+            .sidebar-section { break-inside: avoid; padding-top: 1.9rem; margin-bottom: 0; }
+
+            /* Contact: underlined links, near-black icons */
+            .contact-list { gap: 0.75rem; }
+            .contact-list li { font-size: 0.78rem; }
+            .contact-list a { text-decoration: underline; }
+            .contact-list .icon { width: 26px; height: 26px; background: #1a1a1a; }
+            .contact-list .icon svg { width: 16px; height: 16px; }
+            .contact-list .icon-li { background: transparent; }
+            .contact-list .icon-li svg { width: 31px; height: 31px; fill: #1a1a1a; }
+            .contact-list .icon-web, .contact-list .icon-gh { background: transparent; }
+            .contact-list .icon-web svg { width: 26px; height: 26px; fill: none; stroke: #1a1a1a; stroke-width: 1.6; }
+            .contact-list .icon-gh svg { width: 27px; height: 27px; fill: #1a1a1a; }
+
+            /* Skills as bulleted lists, not pills */
+            .skills-category-title { font-size: 0.84rem; font-weight: 700; margin-bottom: 0.15rem; }
+            /* Tight line spacing within a wrapped bullet; the gap between bullets
+               comes from margin-bottom (so multi-line items aren't over-spaced). */
+            .skills-list { display: block; }
+            .skills-list li {
+                display: list-item; list-style: disc; margin-left: 1.05rem;
+                background: none; padding: 0; border-radius: 0;
+                font-size: 0.78rem; line-height: 1.3; margin-bottom: 0.45rem;
+            }
+            .prof-skill-title { font-size: 0.82rem; margin-bottom: 0.25rem; }
+            .prof-skill-detail, .prof-skill-detail li, .prof-skill-detail a { color: #1a1a1a; }
+            .prof-skill-detail, .prof-skill-detail li { font-size: 0.76rem; line-height: 1.3; }
+            .prof-skill-detail li { margin-bottom: 0.45rem; }
+            .interests-list, .interests-list li { font-size: 0.78rem; line-height: 1.3; }
+            .interests-list li { margin-bottom: 0.5rem; }
+
+            /* Links read as plain text on paper (contact overrides above) */
+            a { color: #1a1a1a !important; text-decoration: none; border-bottom: 0 !important; }
+            .contact-list a { text-decoration: underline !important; }
+
+            /* Hide all interactive chrome */
+            .download-section, .footer, .cv-admin { display: none !important; }
         }
 
         /* ── Responsive ────────────────────────────── */
-        @media (max-width: 768px) {
+        @media screen and (max-width: 768px) {
             .header-inner {
                 flex-direction: column;
                 text-align: center;
@@ -433,7 +685,7 @@
             }
         }
 
-        @media (max-width: 480px) {
+        @media screen and (max-width: 480px) {
             .header-text h1 {
                 font-size: 1.5rem;
             }
@@ -489,7 +741,8 @@
             <img src="assets/headshot.png" alt="Chris Cogbill" class="headshot">
             <div class="header-text">
                 <h1>Chris Cogbill</h1>
-                <p class="tagline">Unit4-certified ERP Consultant &amp; Solutions Architect | 10+ years | Agile Project Manager | Full-stack Developer (SQL, JavaScript, Python) | Cambridge Physics Graduate</p>
+                <p class="tagline only-unit4">Solutions Architect &amp; Principal Unit4 Consultant | 10+ years | Europe &amp; North America | Python, JavaScript, SQL, REST APIs | Cambridge Physics graduate</p>
+                <p class="tagline only-ai">Solutions Architect | 10+ years delivering complex enterprise implementations | Python, JavaScript, SQL, REST APIs | Cambridge Physics graduate</p>
             </div>
         </div>
     </header>
@@ -515,13 +768,13 @@
                                     <span class="role-title">Principal Consultant - Unit4</span>
                                     <span class="role-location">London</span>
                                 </div>
-                                <p class="role-desc">In my role as Principal Consultant I have continued to run successful ERP implementation projects for various customers and cloud migrations for customers in the UK and across North America, in addition to smaller reporting and system enhancement projects. I continue to support the more junior consultants in the team as well as managing contractors.</p>
-                                <p class="role-desc">Strong business development track record with 11 of 12 bids successful.</p>
+                                <p class="role-desc">As Principal Consultant I run ERP implementation, improvement and migration projects for clients across the UK and North America. I have a strong business development track record &mdash; leading sales and marketing demonstrations, with 11 of 12 bids won &mdash; and I support our junior consultants and manage contractors on our larger projects.</p>
                                 <div class="key-projects">
                                     <strong>Key Projects:</strong>
                                     <ul>
-                                        <li><strong><a href="https://www.careuk.com/" target="_blank" rel="noopener">Care UK</a>:</strong> Led 5 acquisition integration projects for care home providers acquired by <a href="https://welltower.com/" target="_blank" rel="noopener">Welltower</a>, delivering all on time. Client returned after trying a cheaper partner for 4 further projects through June 2026.</li>
-                                        <li><strong><a href="https://www.medicinehat.ca/" target="_blank" rel="noopener">City of Medicine Hat</a>:</strong> Ran an intensive health check and produced a report feeding into the system pipeline for future finance improvements.</li>
+                                        <li><strong><a href="https://www.careuk.com/" target="_blank" rel="noopener">Care UK</a>:</strong> Began with Care UK's acquisition by <a href="https://welltower.com/" target="_blank" rel="noopener">Welltower</a> (a US real-estate investment trust) and five care-home acquisition projects migrated into Unit4. The client later returned &mdash; after trialling a cheaper Unit4 partner &mdash; and I have since led the well-publicised <strong>Danforth</strong> and <strong>Aria Care</strong> acquisitions, helping grow Care UK into one of the two largest care-home providers in the UK. All delivered to tight deadlines.</li>
+                                        <li><strong><a href="https://www.medicinehat.ca/" target="_blank" rel="noopener">City of Medicine Hat</a>:</strong> Bid for and ran an intensive Unit4 health check, producing a report that has driven a two-year pipeline of improvement work &mdash; including rewriting report templates to be cloud-compliant using AI.</li>
+                                        <li><strong><a href="https://www.triton-partners.com/" target="_blank" rel="noopener">Triton</a>:</strong> Bid for and delivered an integration between an internally developed AP system and Unit4's general ledger, using AI to generate the integration scripts.</li>
                                     </ul>
                                 </div>
                             </div>
@@ -620,7 +873,7 @@
 
                         <!-- University of Cambridge -->
                         <div class="company-block">
-                            <div class="company-name"><img src="assets/cambridge-logo.svg" alt="" class="company-logo"><a href="https://www.cam.ac.uk" target="_blank" rel="noopener">University of Cambridge</a></div>
+                            <div class="company-name"><img src="assets/cambridge-logo.svg" alt="" class="company-logo edu"><a href="https://www.cam.ac.uk" target="_blank" rel="noopener">University of Cambridge</a></div>
 
                             <div class="role">
                                 <div class="role-date">2010<span class="date-end">– 2013</span></div>
@@ -654,20 +907,20 @@
                             <a href="mailto:chris@cogs.tech">chris@cogs.tech</a>
                         </li>
                         <li>
-                            <span class="icon">
-                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1a2 2 0 002 2v1.93zm6.9-2.54A1.99 1.99 0 0016 16h-1v-3a1 1 0 00-1-1H8v-2h2a1 1 0 001-1V7h2a2 2 0 002-2v-.41A7.99 7.99 0 0120 12c0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                            <span class="icon icon-web">
+                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><ellipse cx="12" cy="12" rx="4" ry="9.5"/><line x1="2.5" y1="12" x2="21.5" y2="12"/><line x1="4.2" y1="7" x2="19.8" y2="7"/><line x1="4.2" y1="17" x2="19.8" y2="17"/></svg>
                             </span>
                             <a href="https://cogs.tech" target="_blank" rel="noopener">cogs.tech</a>
                         </li>
                         <li>
-                            <span class="icon">
-                                <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                            <span class="icon icon-li">
+                                <svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
                             </span>
                             <a href="https://www.linkedin.com/in/chriscogbill" target="_blank" rel="noopener">linkedin.com/in/chriscogbill</a>
                         </li>
                         <li>
-                            <span class="icon">
-                                <svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 002 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"/></svg>
+                            <span class="icon icon-gh">
+                                <svg viewBox="0 0 98 96"><path d="M41.4395 69.3848C28.8066 67.8535 19.9062 58.7617 19.9062 46.9902C19.9062 42.2051 21.6289 37.0371 24.5 33.5918C23.2559 30.4336 23.4473 23.7344 24.8828 20.959C28.7109 20.4805 33.8789 22.4902 36.9414 25.2656C40.5781 24.1172 44.4062 23.543 49.0957 23.543C53.7852 23.543 57.6133 24.1172 61.0586 25.1699C64.0254 22.4902 69.2891 20.4805 73.1172 20.959C74.457 23.543 74.6484 30.2422 73.4043 33.4961C76.4668 37.1328 78.0937 42.0137 78.0937 46.9902C78.0937 58.7617 69.1934 67.6621 56.3691 69.2891C59.623 71.3945 61.8242 75.9883 61.8242 81.252L61.8242 91.2051C61.8242 94.0762 64.2168 95.7031 67.0879 94.5547C84.4102 87.9512 98 70.6289 98 49.1914C98 22.1074 75.9883 6.69539e-07 48.9043 4.309e-07C21.8203 1.92261e-07 -1.9479e-07 22.1074 -4.3343e-07 49.1914C-6.20631e-07 70.4375 13.4941 88.0469 31.6777 94.6504C34.2617 95.6074 36.75 93.8848 36.75 91.3008L36.75 83.6445C35.4102 84.2188 33.6875 84.6016 32.1562 84.6016C25.8398 84.6016 22.1074 81.1563 19.4277 74.7441C18.375 72.1602 17.2266 70.6289 15.0254 70.3418C13.877 70.2461 13.4941 69.7676 13.4941 69.1934C13.4941 68.0449 15.4082 67.1836 17.3223 67.1836C20.0977 67.1836 22.4902 68.9063 24.9785 72.4473C26.8926 75.2227 28.9023 76.4668 31.2949 76.4668C33.6875 76.4668 35.2187 75.6055 37.4199 73.4043C39.0469 71.7773 40.291 70.3418 41.4395 69.3848Z"/></svg>
                             </span>
                             <a href="https://github.com/chriscogbill" target="_blank" rel="noopener">github.com/chriscogbill</a>
                         </li>
@@ -687,6 +940,7 @@
                             <li>Planner (Budgeting)</li>
                             <li>Fixed Assets</li>
                             <li>Report Engine</li>
+                            <li>Integrations</li>
                             <li>REST APIs</li>
                             <li>Extension Kit</li>
                             <li>SOAP Web Services</li>
@@ -791,11 +1045,85 @@
 
     <!-- ── Download ─────────────────────────────── -->
     <div class="download-section">
-        <a href="assets/Chris Cogbill - CV.pdf" download class="download-btn">
+        <a href="assets/cv-unit4.pdf" download="Chris Cogbill - CV.pdf" class="download-btn" id="downloadBtn">
             <svg viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zm7-18v12.17l3.59-3.58L17 12l-5 5-5-5 1.41-1.41L12 14.17V2z"/></svg>
             Download CV (PDF)
         </a>
     </div>
+
+    <!-- ── Settings gear + version toggle (admin only) ── -->
+    <div class="cv-admin">
+        <div class="cv-toggle" role="group" aria-label="Live CV version">
+            <button type="button" data-v="unit4">Unit4 / ERP</button>
+            <button type="button" data-v="ai">AI / Developer</button>
+        </div>
+        <button type="button" class="cv-login">Log in</button>
+        <button type="button" class="cv-gear" aria-label="Settings" title="Settings">
+            <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.31.06-.63.06-.94s-.02-.63-.06-.94l2.03-1.58a.5.5 0 00.12-.64l-1.92-3.32a.5.5 0 00-.61-.22l-2.39.96a7.03 7.03 0 00-1.62-.94l-.36-2.54a.5.5 0 00-.5-.42h-3.84a.5.5 0 00-.5.42l-.36 2.54c-.59.24-1.13.56-1.62.94l-2.39-.96a.5.5 0 00-.61.22L2.74 8.84a.5.5 0 00.12.64l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58a.5.5 0 00-.12.64l1.92 3.32c.13.22.39.31.61.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.04.24.25.42.5.42h3.84c.25 0 .46-.18.5-.42l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.09.48 0 .61-.22l1.92-3.32a.5.5 0 00-.12-.64l-2.03-1.58zM12 15.5A3.5 3.5 0 1112 8.5a3.5 3.5 0 010 7z"/></svg>
+        </button>
+    </div>
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var container = document.querySelector('.cv-admin');
+        var gear = document.querySelector('.cv-gear');
+        var loginUrl = 'https://auth.cogs.tech/login?redirect=' + encodeURIComponent(location.origin + '/');
+        var isAdmin = false;
+
+        // Point the download button at the PDF matching the live version
+        function updateDownload() {
+          var dl = document.getElementById('downloadBtn');
+          if (dl) dl.href = root.classList.contains('cv-ai') ? 'assets/cv-ai.pdf' : 'assets/cv-unit4.pdf';
+        }
+        updateDownload();
+
+        // Am I Chris? (server checks the shared cogs-auth session — no login forced)
+        fetch('/api/me', { credentials: 'same-origin' })
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            isAdmin = !!(d && d.admin);
+            if (isAdmin) root.classList.add('admin');
+          })
+          .catch(function () {});
+
+        gear.addEventListener('click', function () {
+          container.classList.toggle('cv-open');
+        });
+        var loginBtn = document.querySelector('.cv-login');
+        if (loginBtn) loginBtn.addEventListener('click', function () {
+          location.href = loginUrl; // sign in via cogs-auth, then return here
+        });
+
+        document.querySelectorAll('.cv-toggle button').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var v = btn.getAttribute('data-v');
+            var prev = root.classList.contains('cv-ai') ? 'ai' : 'unit4';
+            if (v === prev) return;
+            // Optimistic switch, then persist to KV for all visitors.
+            root.classList.remove('cv-unit4', 'cv-ai');
+            root.classList.add('cv-' + v);
+            updateDownload();
+            fetch('/api/cv-version', {
+              method: 'POST',
+              credentials: 'same-origin',
+              headers: { 'content-type': 'application/json' },
+              body: JSON.stringify({ version: v })
+            }).then(function (r) {
+              if (!r.ok) {
+                root.classList.remove('cv-unit4', 'cv-ai');
+                root.classList.add('cv-' + prev);
+                if (r.status === 401) location.href = loginUrl;
+                else alert('Could not update the live version.');
+              }
+            }).catch(function () {
+              root.classList.remove('cv-unit4', 'cv-ai');
+              root.classList.add('cv-' + prev);
+              alert('Could not reach the server.');
+            });
+          });
+        });
+      })();
+    </script>
 
     <!-- ── Footer ────────────────────────────────── -->
     <footer class="footer">

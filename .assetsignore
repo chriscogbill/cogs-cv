@@ -1,0 +1,11 @@
+.git/
+.wrangler/
+.claude/
+node_modules/
+.DS_Store
+*.log
+worker.js
+wrangler.jsonc
+.assetsignore
+.dev.vars
+.gitignore

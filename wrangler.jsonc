@@ -1,7 +1,16 @@
 {
   "name": "cogs-cv",
   "compatibility_date": "2026-02-14",
+  "main": "worker.js",
   "assets": {
-    "directory": "./"
-  }
+    "directory": "./",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  },
+  "kv_namespaces": [
+    {
+      "binding": "CV_STATE",
+      "id": "c313cf0bbaf74623998a108807f26711"
+    }
+  ]
 }
