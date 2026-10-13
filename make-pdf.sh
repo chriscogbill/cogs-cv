@@ -18,7 +18,5 @@ sleep 1
   --print-to-pdf="assets/cv-unit4.pdf" "http://localhost:$PORT/?cv=unit4" 2>/dev/null
 "$CHROME" --headless --disable-gpu --no-pdf-header-footer \
   --print-to-pdf="assets/cv-ai.pdf" "http://localhost:$PORT/?cv=ai" 2>/dev/null
-"$CHROME" --headless --disable-gpu --no-pdf-header-footer \
-  --print-to-pdf="assets/cv-erp.pdf" "http://localhost:$PORT/?cv=erp" 2>/dev/null
 
-echo "Wrote assets/cv-unit4.pdf, assets/cv-ai.pdf and assets/cv-erp.pdf"
+echo "Wrote assets/cv-unit4.pdf and assets/cv-ai.pdf"
