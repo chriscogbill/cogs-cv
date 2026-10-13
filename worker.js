@@ -7,7 +7,7 @@
 //
 // Bindings (see wrangler.jsonc):
 //   ASSETS    - static assets (the repo files)
-//   CV_STATE  - KV namespace holding key "version" = "unit4" | "ai"
+//   CV_STATE  - KV namespace holding key "version" = "unit4" | "ai" | "erp"
 //   DEV_ADMIN - "1" in .dev.vars to treat local requests as admin (prod: unset)
 
 const DEFAULT_VERSION = 'unit4';
@@ -15,7 +15,7 @@ const ADMIN_EMAIL = 'cecogbill@gmail.com';
 const AUTH_ME_URL = 'https://auth.cogs.tech/api/auth/me';
 
 function normalise(v) {
-  return v === 'ai' ? 'ai' : 'unit4';
+  return v === 'ai' || v === 'erp' ? v : 'unit4';
 }
 
 // Validate the visitor against the shared cogs-auth session (server-side, no CORS).
@@ -80,7 +80,7 @@ export default {
     return new HTMLRewriter()
       .on('html', {
         element(el) {
-          const existing = (el.getAttribute('class') || '').replace(/\bcv-(unit4|ai)\b/g, '').trim();
+          const existing = (el.getAttribute('class') || '').replace(/\bcv-(unit4|ai|erp)\b/g, '').trim();
           el.setAttribute('class', (existing + ' cv-' + version).trim());
         },
       })

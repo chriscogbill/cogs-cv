@@ -18,9 +18,9 @@
       (function () {
         try {
           var forced = new URLSearchParams(location.search).get('cv');
-          if (forced === 'ai' || forced === 'unit4') {
+          if (forced === 'ai' || forced === 'unit4' || forced === 'erp') {
             var r = document.documentElement;
-            r.classList.remove('cv-unit4', 'cv-ai');
+            r.classList.remove('cv-unit4', 'cv-ai', 'cv-erp');
             r.classList.add('cv-' + forced);
           }
         } catch (e) {}
@@ -420,9 +420,10 @@
         }
 
         /* ── CV Version Variants ───────────────────── */
-        .only-ai, .only-unit4 { display: none; }
+        .only-ai, .only-unit4, .only-erp { display: none; }
         html.cv-ai .only-ai { display: revert; }
         html.cv-unit4 .only-unit4 { display: revert; }
+        html.cv-erp .only-erp { display: revert; }
 
         /* ── Settings gear + version toggle (admin) ── */
         .cv-admin {
@@ -490,7 +491,8 @@
         }
         .cv-toggle button:hover { color: #f5f5f5; }
         html.cv-unit4 .cv-toggle button[data-v="unit4"],
-        html.cv-ai .cv-toggle button[data-v="ai"] {
+        html.cv-ai .cv-toggle button[data-v="ai"],
+        html.cv-erp .cv-toggle button[data-v="erp"] {
             background: #369b5a;
             color: #fff;
         }
@@ -749,6 +751,9 @@
                 <h1>Chris Cogbill</h1>
                 <p class="tagline only-unit4">Unit4-certified Principal Consultant &amp; Solutions Architect | ERP implementations, acquisitions &amp; cloud migrations | 10+ years across Europe &amp; North America | 11 of 12 bids won | Cambridge Physics graduate</p>
                 <p class="tagline only-ai">Solutions Architect | 10+ years delivering complex enterprise implementations | Python, JavaScript, SQL, REST APIs | Cambridge Physics graduate</p>
+                <!-- ERP + AI: the middle framing (added 2026-10-13 for AI-native ERP roles) —
+                     finance-system delivery first, vendor second, the AI thread visible up top. -->
+                <p class="tagline only-erp">Principal ERP Consultant &amp; Solutions Architect | 10+ years of end-to-end finance-system implementations (Unit4) across Europe &amp; North America | multi-entity acquisitions &amp; cloud migrations | building AI tooling with Claude | Cambridge Physics graduate</p>
             </div>
         </div>
     </header>
@@ -1060,6 +1065,7 @@
     <div class="cv-admin">
         <div class="cv-toggle" role="group" aria-label="Live CV version">
             <button type="button" data-v="unit4">Unit4 / ERP</button>
+            <button type="button" data-v="erp">ERP + AI</button>
             <button type="button" data-v="ai">AI / Developer</button>
         </div>
         <button type="button" class="cv-login">Log in</button>
@@ -1070,6 +1076,18 @@
     <script>
       (function () {
         var root = document.documentElement;
+        var VERSIONS = ['unit4', 'ai', 'erp'];
+        var CLASSES = VERSIONS.map(function (v) { return 'cv-' + v; });
+        function current() {
+          for (var i = 0; i < VERSIONS.length; i++) {
+            if (root.classList.contains('cv-' + VERSIONS[i])) return VERSIONS[i];
+          }
+          return 'unit4';
+        }
+        function setVersionClass(v) {
+          CLASSES.forEach(function (c) { root.classList.remove(c); });
+          root.classList.add('cv-' + v);
+        }
         var container = document.querySelector('.cv-admin');
         var gear = document.querySelector('.cv-gear');
         var loginUrl = 'https://auth.cogs.tech/login?redirect=' + encodeURIComponent(location.origin + '/');
@@ -1078,7 +1096,7 @@
         // Point the download button at the PDF matching the live version
         function updateDownload() {
           var dl = document.getElementById('downloadBtn');
-          if (dl) dl.href = root.classList.contains('cv-ai') ? 'assets/cv-ai.pdf' : 'assets/cv-unit4.pdf';
+          if (dl) dl.href = 'assets/cv-' + current() + '.pdf';
         }
         updateDownload();
 
@@ -1102,11 +1120,10 @@
         document.querySelectorAll('.cv-toggle button').forEach(function (btn) {
           btn.addEventListener('click', function () {
             var v = btn.getAttribute('data-v');
-            var prev = root.classList.contains('cv-ai') ? 'ai' : 'unit4';
+            var prev = current();
             if (v === prev) return;
             // Optimistic switch, then persist to KV for all visitors.
-            root.classList.remove('cv-unit4', 'cv-ai');
-            root.classList.add('cv-' + v);
+            setVersionClass(v);
             updateDownload();
             fetch('/api/cv-version', {
               method: 'POST',
@@ -1115,14 +1132,14 @@
               body: JSON.stringify({ version: v })
             }).then(function (r) {
               if (!r.ok) {
-                root.classList.remove('cv-unit4', 'cv-ai');
-                root.classList.add('cv-' + prev);
+                setVersionClass(prev);
+                updateDownload();
                 if (r.status === 401) location.href = loginUrl;
                 else alert('Could not update the live version.');
               }
             }).catch(function () {
-              root.classList.remove('cv-unit4', 'cv-ai');
-              root.classList.add('cv-' + prev);
+              setVersionClass(prev);
+              updateDownload();
               alert('Could not reach the server.');
             });
           });
