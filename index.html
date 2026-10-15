@@ -564,7 +564,7 @@
 
             /* Dates: small, stacked over two lines, right-aligned by the line */
             .role-date {
-                color: #1a1a1a; top: 1px;
+                color: #1a1a1a; top: 4.5px; /* first line centred on the 12px dot (top 4px) */
                 left: -3.5rem; width: 1.6rem;
                 font-size: 0.58rem; line-height: 1.2;
                 font-weight: 700; text-align: right;
@@ -601,9 +601,14 @@
                 background: #e7e7e7;
                 border-radius: 16px;
                 margin-top: 14mm;
-                padding: 0 1.2rem 1.4rem;
+                /* clone: every page fragment of the panel gets this top inset, so the
+                   continuation on page 2 doesn't start flush with the page edge */
+                -webkit-box-decoration-break: clone;
+                box-decoration-break: clone;
+                padding: 7mm 1.2rem 1rem;
             }
-            .sidebar-section { break-inside: auto; padding-top: 1.1rem; margin-bottom: 0; }
+            .sidebar-section:first-child { padding-top: 0; }
+            .sidebar-section { break-inside: auto; padding-top: 1rem; margin-bottom: 0; }
             .sidebar-section li { break-inside: avoid; }
 
             /* Contact: underlined links, near-black icons */
