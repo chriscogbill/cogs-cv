@@ -613,7 +613,9 @@
                 padding-top: 12mm;
             }
             .sidebar-section { break-inside: auto; padding-top: 1rem; margin-bottom: 0; }
-            .sidebar-section:first-child { padding-top: 0; }
+            /* Page 1 only: the cloned 12mm inset is too much above 'Contact', so
+               the first section pulls up into it, leaving ~5mm (as on the main column). */
+            .sidebar-section:first-child { padding-top: 0; margin-top: -7mm; }
             .sidebar-section li { break-inside: avoid; }
             .prof-skill-title, .skills-category-title { break-after: avoid; }
 
