@@ -611,6 +611,7 @@
                 -webkit-box-decoration-break: clone;
                 box-decoration-break: clone;
                 padding-top: 12mm;
+                padding-bottom: 9mm; /* bottom inset at the page break, like the main column */
             }
             .sidebar-section { break-inside: auto; padding-top: 1rem; margin-bottom: 0; }
             /* Page 1 only: the cloned 12mm inset is too much above 'Contact', so
@@ -620,13 +621,13 @@
             .prof-skill-title, .skills-category-title { break-after: avoid; }
 
             /* Contact: underlined links, near-black icons */
-            .contact-list { gap: 0.75rem; }
-            .contact-list li { font-size: 0.74rem; }
+            .contact-list { gap: 0.55rem; }
+            .contact-list li { font-size: 0.7rem; }
             .contact-list a { text-decoration: underline; }
-            .contact-list .icon { width: 26px; height: 26px; background: #1a1a1a; }
-            .contact-list .icon svg { width: 16px; height: 16px; }
+            .contact-list .icon { width: 22px; height: 22px; background: #1a1a1a; }
+            .contact-list .icon svg { width: 14px; height: 14px; }
             .contact-list .icon-li { background: transparent; }
-            .contact-list .icon-li svg { width: 31px; height: 31px; fill: #1a1a1a; }
+            .contact-list .icon-li svg { width: 26px; height: 26px; fill: #1a1a1a; }
             .contact-list .icon-web, .contact-list .icon-gh { background: transparent; }
             .contact-list .icon-web svg { width: 26px; height: 26px; fill: none; stroke: #1a1a1a; stroke-width: 1.6; }
             .contact-list .icon-gh svg { width: 27px; height: 27px; fill: #1a1a1a; }
