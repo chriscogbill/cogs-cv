@@ -500,7 +500,10 @@
             /* Zero page margin: the grey column + timeline bleed to the page
                edges and continue across pages; per-page insets come from
                box-decoration-break: clone on the columns below. */
-            @page { size: A4; margin: 0; }
+            /* 9mm top page margin: the one inset that applies to EVERY page, so the
+               sidebar's sliced continuation on page 2 isn't flush with the edge.
+               Header / main / aside tops are reduced by the same amount below. */
+            @page { size: A4; margin: 9mm 0 0 0; }
             html, body {
                 background: #fff;
                 font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -512,7 +515,7 @@
             /* Canva-style arrow header band (page 1): white above and to the right,
                bleeds off the left edge. */
             .header {
-                margin: 8mm 14mm 0 0;
+                margin: 0 14mm 0 0;
                 padding: 1rem 4rem 1rem 12mm;
                 background: linear-gradient(90deg, #0d0d0d 0%, #3d3d3d 100%);
                 -webkit-clip-path: polygon(0 0, 92% 0, 100% 50%, 92% 100%, 0 100%);
@@ -537,13 +540,13 @@
                 align-self: start;
                 -webkit-box-decoration-break: clone;
                 box-decoration-break: clone;
-                padding: 12mm 0 9mm;
+                padding: 3mm 0 9mm;
             }
             main::before {
                 content: '';
                 position: absolute;
                 left: 2.25rem;
-                top: calc(12mm + 2.75rem);
+                top: calc(3mm + 2.75rem);
                 bottom: calc(9mm + 0.4rem);
                 width: 2px;
                 background: #1a1a1a;
@@ -564,7 +567,7 @@
 
             /* Dates: small, stacked over two lines, right-aligned by the line */
             .role-date {
-                color: #1a1a1a; top: 4.5px; /* first line centred on the 12px dot (top 4px) */
+                color: #1a1a1a; top: -1px; /* two-line date block (~22px) centred on the 12px dot (top 4px) */
                 left: -3.5rem; width: 1.6rem;
                 font-size: 0.58rem; line-height: 1.2;
                 font-weight: 700; text-align: right;
@@ -600,16 +603,16 @@
             aside {
                 background: #e7e7e7;
                 border-radius: 16px;
-                margin-top: 14mm;
-                /* clone: every page fragment of the panel gets this top inset, so the
-                   continuation on page 2 doesn't start flush with the page edge */
-                -webkit-box-decoration-break: clone;
-                box-decoration-break: clone;
-                padding: 7mm 1.2rem 1rem;
+                margin-top: 5mm;
+                padding: 0 1.2rem 1.2rem;
             }
-            .sidebar-section:first-child { padding-top: 0; }
+            /* Sections don't split across the page break: the section that opens
+               page 2 brings its own top padding, so the continuation isn't flush
+               with the page edge, and the panel keeps its sliced corners. */
+            .sidebar-section:first-child { padding-top: 1.2rem; }
             .sidebar-section { break-inside: auto; padding-top: 1rem; margin-bottom: 0; }
             .sidebar-section li { break-inside: avoid; }
+            .prof-skill-title, .skills-category-title { break-after: avoid; }
 
             /* Contact: underlined links, near-black icons */
             .contact-list { gap: 0.75rem; }
@@ -624,20 +627,21 @@
             .contact-list .icon-gh svg { width: 27px; height: 27px; fill: #1a1a1a; }
 
             /* Skills as bulleted lists, not pills */
-            .skills-category-title { font-size: 0.8rem; font-weight: 700; margin-bottom: 0.12rem; }
+            .sidebar-section .section-title { font-size: 0.98rem; margin-bottom: 0.55rem; }
+            .skills-category-title { font-size: 0.74rem; font-weight: 700; margin-bottom: 0.15rem; }
             /* Tight line spacing within a wrapped bullet; the gap between bullets
                comes from margin-bottom (so multi-line items aren't over-spaced). */
             .skills-list { display: block; }
             .skills-list li {
                 display: list-item; list-style: disc; margin-left: 1.05rem;
                 background: none; padding: 0; border-radius: 0;
-                font-size: 0.7rem; line-height: 1.22; margin-bottom: 0.2rem;
+                font-size: 0.7rem; line-height: 1.25; margin-bottom: 0.2rem;
             }
-            .prof-skill-title { font-size: 0.82rem; margin-bottom: 0.25rem; }
+            .prof-skill-title { font-size: 0.74rem; margin-bottom: 0.2rem; }
             .prof-skill-detail, .prof-skill-detail li, .prof-skill-detail a { color: #1a1a1a; }
-            .prof-skill-detail, .prof-skill-detail li { font-size: 0.7rem; line-height: 1.22; }
+            .prof-skill-detail, .prof-skill-detail li { font-size: 0.7rem; line-height: 1.25; }
             .prof-skill-detail li { margin-bottom: 0.2rem; }
-            .interests-list, .interests-list li { font-size: 0.7rem; line-height: 1.22; }
+            .interests-list, .interests-list li { font-size: 0.7rem; line-height: 1.25; }
             .interests-list li { margin-bottom: 0.22rem; }
 
             /* Links read as plain text on paper (contact overrides above) */
