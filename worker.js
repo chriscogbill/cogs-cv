@@ -58,6 +58,11 @@ export default {
         return Response.json({ version });
       }
       if (request.method === 'POST') {
+        // The shared session cookie is SameSite=None, so a cross-site page could
+        // otherwise send this POST with Chris's session attached.
+        if (request.headers.get('Origin') !== url.origin) {
+          return new Response('Forbidden', { status: 403 });
+        }
         const allowed = devAdmin || isAdmin(await getUser(request));
         if (!allowed) return new Response('Unauthorized', { status: 401 });
         let body = {};
