@@ -14,6 +14,12 @@ const DEFAULT_VERSION = 'unit4';
 const ADMIN_EMAIL = 'cecogbill@gmail.com';
 const AUTH_ME_URL = 'https://auth.cogs.tech/api/auth/me';
 
+// Downloadable PDFs from before the dual-version CV (removed Nov 2026)
+const OLD_PDF_PATHS = new Set([
+  '/assets/Chris Cogbill - CV.pdf',
+  '/assets/Chris Cogbill - CV 2.pdf',
+]);
+
 function normalise(v) {
   return v === 'ai' ? 'ai' : 'unit4';
 }
@@ -72,6 +78,12 @@ export default {
         return Response.json({ version });
       }
       return new Response('Method Not Allowed', { status: 405 });
+    }
+
+    // ── Retired PDFs: old links (e.g. in past applications) get the live CV ──
+    if (OLD_PDF_PATHS.has(decodeURIComponent(url.pathname))) {
+      const version = (await env.CV_STATE.get('version')) || DEFAULT_VERSION;
+      return Response.redirect(`${url.origin}/assets/cv-${version}.pdf`, 302);
     }
 
     // ── Everything else: serve assets, injecting the live version ─────
